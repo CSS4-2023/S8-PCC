@@ -1,0 +1,7 @@
+useradd -u 2000 -d /home/ansible -m ansible
+echo "ansible ALL=(ALL) NOPASSWD:ALL">>/etc/sudoers.d/ansible
+mkdir -p /home/ansible/.ssh
+chown -R ansible:ansible /home/ansible
+touch /home/ansible/.ssh/authorized_keys
+echo "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQC5xne3CDb9mo499eXRScnIOZSYCoxkaHu+3u2RCrW1Xa5ryov1UieH/cWTQLIJ9q6DZ4/KNQ662HfvadUxihDArxJomY0JRy2/f1D5Ta99DnyEcuYr1wbJWu2Y8ZJYTd8dK7hpiDXq9ZZeH0VjxZLNmHCuOacsv1ov1nYx2FsFlHu1zlG9T3KZdeuF5UP02Zl0uH5EJ027/MOTfzMbAcezB/ZihnbaR6UM6PwnjK24BIZcln/e9oKoCz9Iy6nLa6z1rNW3rRpvJhkiwvtG179v4tc4zUeTrPkgP3Wc5hWmuT4DxkCNMp2Oq78iQC9aBKUD65E+MGjtiumojF02IwAP2NhW9jdCDzRk8jMLgmXKh5MnW+5flZDT7zzFNdLrXHtslizG6QFCcsP//AR9udqZr9dez4ldRZ6Dq8SW0iU3xuEY8EkkKa7KM6YKuUxZt8gBov527GEihN7lKeGJ58J5qJFMQF23lB/J6OFTSjFvh0LjCtCBrmwuMRP54YBnjMU= root@CAUCHY15
+" >> /home/ansible/.ssh/authorized_keys

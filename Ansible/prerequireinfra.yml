@@ -1,0 +1,170 @@
+---
+- name: Retrieve Gitea files from backup server
+  hosts: localhost
+  vars:
+    backup_server: "192.168.4.110"
+    backup_user: "root"
+    vm_path: "/root/vm"
+
+  tasks:
+    - name: Copy vm folder to admin host
+      become: true
+      command: scp -i ~/.ssh/sauvegarde -r {{ backup_user }}@{{ backup_server }}:{{ vm_path }} /home/etudis/Bureau/
+
+    - name: Copy VM-gitea folder to Bureau
+      become: true
+      command: cp -rf /home/etudis/Bureau/vm/VM-gitea /home/etudis/Bureau/
+
+    - name: Copy VM-vault folder to Bureau
+      become: true
+      command: cp -r /home/etudis/Bureau/vm/VM-vault /home/etudis/Bureau/
+
+- name: Copy VM-rp-apache folder to pfSense host
+  hosts: 172.16.2.17
+  tasks:
+    - name: Copying file from localhost to remote machine
+      become: true
+      copy:
+        src: /home/etudis/Bureau/vm/VM-rp-apache
+        dest: /home/ansible
+
+- name: Copy VM-rp-haproxy folder to pfSense host
+  hosts: 172.16.2.17
+  tasks:
+    - name: Copying file from localhost to remote machine
+      become: true
+      copy:
+        src: /home/etudis/Bureau/vm/VM-rp-haproxy
+        dest: /home/ansible
+
+- name: Change owner file
+  hosts: 172.16.2.17
+  tasks:
+    - name: chown command
+      become: true
+      command: chown -R ansible:ansible /home/ansible/VM-rp-apache
+
+- name: Change owner file
+  hosts: 172.16.2.17
+  tasks:
+    - name: chown command
+      become: true
+      command: chown -R ansible:ansible /home/ansible/VM-rp-haproxy
+
+- name: Deploy Reverse-proxy Server
+  hosts: 172.16.2.17
+  vars:
+    dir: /home/ansible/VM-rp-apache
+  tasks:
+    - name: Vagrant up Reverse-proxy Server
+      become: false
+      shell: vagrant up
+      args:
+        chdir: "{{ dir }}"
+
+- name: Deploy Loadbalancing Server
+  hosts: 172.16.2.17
+  vars:
+    dir: /home/ansible/VM-rp-haproxy
+  tasks:
+    - name: Vagrant up Loadbalancing Server
+      become: false
+      shell: vagrant up
+      args:
+        chdir: "{{ dir }}"
+
+- name: Copy backup private_key to VM-vault
+  hosts: localhost
+  tasks:
+    - name: Copying backup_key from local machine to VM-vault
+      become: true
+      command: cp ~/.ssh/backup /home/etudis/Bureau/VM-vault/data/backup
+
+- name: Copy test private_key to VM-vault
+  hosts: localhost
+  tasks:
+    - name: Copying test_key from local machine to VM-vault
+      become: true
+      command: cp ~/.ssh/test /home/etudis/Bureau/VM-vault/data/test
+
+- name: Copy passwd to VM-vault
+  hosts: localhost
+  tasks:
+    - name: Copying passwd from local machine to VM-vault
+      become: true
+      command: cp ~/.ssh/passwd /home/etudis/Bureau/VM-vault/data/passwd
+
+- name: Deploy Vault Server
+  hosts: localhost
+  vars:
+    dir: /home/etudis/Bureau/VM-vault
+  tasks:
+    - name: Vagrant up Vault Server
+      become: false
+      shell: vagrant up
+      args:
+        chdir: "{{ dir }}"
+
+- name: Recover and share vault backup token to local
+  hosts: localhost
+  tasks:
+    - name: Copy backup token from VM-vault to VM-gitea
+      become: true
+      copy:
+        src: /home/etudis/Bureau/VM-vault/data/backup_token
+        dest: /home/etudis/Bureau/VM-gitea/data
+
+- name: Copy VM-db-gitea folder to DB host
+  hosts: Cauchy17.e4.sirt.tp
+  tasks:
+    - name: Copying file from localhost to remote machine
+      become: true
+      copy:
+        src: /home/etudis/Bureau/vm/VM-db-gitea
+        dest: /home/ansible
+
+- name: Change owner file
+  hosts: Cauchy17.e4.sirt.tp
+  tasks:
+    - name: chown command
+      become: true
+      command: chown -R ansible:ansible /home/ansible/VM-db-gitea
+
+- name: Recover and share vault backup token to remote DB
+  hosts: Cauchy17.e4.sirt.tp
+  tasks:
+    - name: Copy backup token from VM-vault to VM-db-gitea
+      become: true
+      copy:
+        src: /home/etudis/Bureau/VM-vault/data/backup_token
+        dest: /home/ansible/VM-db-gitea/data
+
+- name: Recover and share vault passwd token to remote DB
+  hosts: Cauchy17.e4.sirt.tp
+  tasks:
+    - name: Copy passwd token from VM-vault to VM-db-gitea
+      become: true
+      copy:
+        src: /home/etudis/Bureau/VM-vault/data/passwd_token
+        dest: /home/ansible/VM-db-gitea/data
+
+- name: Deploy MySQL DB Server for Gitea
+  hosts: Cauchy17.e4.sirt.tp
+  vars:
+    dir: /home/ansible/VM-db-gitea
+  tasks:
+    - name: Vagrant up MySQL DB Server for Gitea
+      become: false
+      shell: vagrant up
+      args:
+        chdir: "{{ dir }}"
+
+- name: Deploy Gitea Server
+  hosts: localhost
+  vars:
+    dir: /home/etudis/Bureau/VM-gitea
+  tasks:
+    - name: Vagrant up Gitea Server
+      shell: vagrant up
+      args:
+        chdir: "{{ dir }}"

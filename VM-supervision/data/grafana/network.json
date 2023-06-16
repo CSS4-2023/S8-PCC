@@ -1,0 +1,2541 @@
+{
+  "annotations": {
+    "list": [
+      {
+        "builtIn": 1,
+        "datasource": {
+          "type": "grafana",
+          "uid": "-- Grafana --"
+        },
+        "enable": true,
+        "hide": true,
+        "iconColor": "rgba(0, 211, 255, 1)",
+        "name": "Annotations & Alerts",
+        "target": {
+          "limit": 100,
+          "matchAny": false,
+          "tags": [],
+          "type": "dashboard"
+        },
+        "type": "dashboard"
+      }
+    ]
+  },
+  "editable": true,
+  "fiscalYearStartMonth": 0,
+  "graphTooltip": 0,
+  "id": 1,
+  "links": [],
+  "liveNow": false,
+  "panels": [
+    {
+      "collapsed": true,
+      "gridPos": {
+        "h": 1,
+        "w": 24,
+        "x": 0,
+        "y": 0
+      },
+      "id": 38,
+      "panels": [
+        {
+          "datasource": {},
+          "fieldConfig": {
+            "defaults": {
+              "mappings": [],
+              "thresholds": {
+                "mode": "absolute",
+                "steps": [
+                  {
+                    "color": "green"
+                  },
+                  {
+                    "color": "red",
+                    "value": 80
+                  }
+                ]
+              },
+              "unit": "ms"
+            },
+            "overrides": []
+          },
+          "gridPos": {
+            "h": 3,
+            "w": 4,
+            "x": 0,
+            "y": 1
+          },
+          "id": 12,
+          "options": {
+            "colorMode": "value",
+            "graphMode": "area",
+            "justifyMode": "auto",
+            "orientation": "auto",
+            "reduceOptions": {
+              "calcs": [
+                "lastNotNull"
+              ],
+              "fields": "",
+              "values": false
+            },
+            "textMode": "auto"
+          },
+          "pluginVersion": "9.5.3",
+          "targets": [
+            {
+              "datasource": {
+                "type": "sni-pnp-datasource"
+              },
+              "host": "Internet_Connection",
+              "perflabel": "rta",
+              "refId": "A",
+              "service": "_HOST_"
+            }
+          ],
+          "title": "Internet Connection PING",
+          "type": "stat"
+        }
+      ],
+      "title": "Internet Connection",
+      "type": "row"
+    },
+    {
+      "collapsed": false,
+      "gridPos": {
+        "h": 1,
+        "w": 24,
+        "x": 0,
+        "y": 1
+      },
+      "id": 40,
+      "panels": [],
+      "title": "Reverse-proxy",
+      "type": "row"
+    },
+    {
+      "datasource": {
+        "type": "sni-pnp-datasource"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          },
+          "unit": "ms"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 4,
+        "w": 5,
+        "x": 0,
+        "y": 2
+      },
+      "id": 41,
+      "options": {
+        "colorMode": "value",
+        "graphMode": "area",
+        "justifyMode": "auto",
+        "orientation": "auto",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "textMode": "auto"
+      },
+      "pluginVersion": "9.5.3",
+      "targets": [
+        {
+          "datasource": {
+            "type": "sni-pnp-datasource"
+          },
+          "host": "Reverse-proxy",
+          "perflabel": "rta",
+          "refId": "A",
+          "service": "PING"
+        }
+      ],
+      "title": "PING",
+      "type": "stat"
+    },
+    {
+      "datasource": {
+        "type": "sni-pnp-datasource"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          },
+          "unit": "s"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 4,
+        "w": 5,
+        "x": 5,
+        "y": 2
+      },
+      "id": 42,
+      "options": {
+        "colorMode": "value",
+        "graphMode": "area",
+        "justifyMode": "auto",
+        "orientation": "auto",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "textMode": "auto"
+      },
+      "pluginVersion": "9.5.3",
+      "targets": [
+        {
+          "datasource": {
+            "type": "sni-pnp-datasource"
+          },
+          "host": "Reverse-proxy",
+          "perflabel": "time",
+          "refId": "A",
+          "service": "SSH"
+        }
+      ],
+      "title": "SSH",
+      "type": "stat"
+    },
+    {
+      "datasource": {
+        "type": "sni-pnp-datasource"
+      },
+      "description": "",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "mappings": [],
+          "max": 1000112,
+          "min": 0,
+          "thresholds": {
+            "mode": "percentage",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "#EAB839",
+                "value": 70
+              },
+              {
+                "color": "red",
+                "value": 95
+              }
+            ]
+          },
+          "unit": "deckbytes"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 6,
+        "w": 4,
+        "x": 10,
+        "y": 2
+      },
+      "id": 43,
+      "options": {
+        "orientation": "auto",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "showThresholdLabels": false,
+        "showThresholdMarkers": true
+      },
+      "pluginVersion": "9.5.3",
+      "targets": [
+        {
+          "datasource": {
+            "type": "sni-pnp-datasource"
+          },
+          "host": "Reverse-proxy",
+          "perflabel": "USED",
+          "refId": "A",
+          "service": "RAM"
+        }
+      ],
+      "title": "Memory Usage",
+      "type": "gauge"
+    },
+    {
+      "datasource": {
+        "type": "sni-pnp-datasource"
+      },
+      "description": "",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "mappings": [],
+          "max": 6520,
+          "min": 0,
+          "thresholds": {
+            "mode": "percentage",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "#EAB839",
+                "value": 70
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          },
+          "unit": "decmbytes"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 6,
+        "w": 4,
+        "x": 14,
+        "y": 2
+      },
+      "id": 44,
+      "options": {
+        "orientation": "auto",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "showThresholdLabels": false,
+        "showThresholdMarkers": true
+      },
+      "pluginVersion": "9.5.3",
+      "targets": [
+        {
+          "alias": "USED",
+          "datasource": {
+            "type": "sni-pnp-datasource"
+          },
+          "host": "Reverse-proxy",
+          "perflabel": "/",
+          "refId": "A",
+          "service": "Disk",
+          "type": "AVERAGE"
+        }
+      ],
+      "title": "Root Partition Usage",
+      "type": "gauge"
+    },
+    {
+      "datasource": {
+        "type": "sni-pnp-datasource"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "axisCenteredZero": false,
+            "axisColorMode": "text",
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "barAlignment": 0,
+            "drawStyle": "line",
+            "fillOpacity": 0,
+            "gradientMode": "none",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "lineInterpolation": "linear",
+            "lineWidth": 1,
+            "pointSize": 5,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "auto",
+            "spanNulls": false,
+            "stacking": {
+              "group": "A",
+              "mode": "none"
+            },
+            "thresholdsStyle": {
+              "mode": "off"
+            }
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          }
+        },
+        "overrides": [
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Critical"
+            },
+            "properties": [
+              {
+                "id": "color",
+                "value": {
+                  "fixedColor": "red",
+                  "mode": "fixed"
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "gridPos": {
+        "h": 6,
+        "w": 6,
+        "x": 18,
+        "y": 2
+      },
+      "id": 46,
+      "options": {
+        "legend": {
+          "calcs": [],
+          "displayMode": "list",
+          "placement": "bottom",
+          "showLegend": true
+        },
+        "tooltip": {
+          "mode": "single",
+          "sort": "none"
+        }
+      },
+      "targets": [
+        {
+          "alias": "Used",
+          "datasource": {
+            "type": "sni-pnp-datasource"
+          },
+          "host": "Reverse-proxy",
+          "perflabel": "/",
+          "refId": "A",
+          "service": "Disk"
+        },
+        {
+          "alias": "Warning",
+          "datasource": {
+            "type": "sni-pnp-datasource"
+          },
+          "hide": false,
+          "host": "Reverse-proxy",
+          "perflabel": "/",
+          "refId": "B",
+          "service": "Disk",
+          "type": "WARNING"
+        },
+        {
+          "alias": "Critical",
+          "datasource": {
+            "type": "sni-pnp-datasource"
+          },
+          "hide": false,
+          "host": "Reverse-proxy",
+          "perflabel": "/",
+          "refId": "C",
+          "service": "Disk",
+          "type": "CRITICAL"
+        }
+      ],
+      "title": "Root Partition",
+      "type": "timeseries"
+    },
+    {
+      "datasource": {
+        "type": "sni-pnp-datasource"
+      },
+      "description": "",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "axisCenteredZero": false,
+            "axisColorMode": "text",
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "barAlignment": 0,
+            "drawStyle": "line",
+            "fillOpacity": 10,
+            "gradientMode": "opacity",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "lineInterpolation": "linear",
+            "lineStyle": {
+              "fill": "solid"
+            },
+            "lineWidth": 1,
+            "pointSize": 4,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "auto",
+            "spanNulls": false,
+            "stacking": {
+              "group": "A",
+              "mode": "none"
+            },
+            "thresholdsStyle": {
+              "mode": "off"
+            }
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          }
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 10,
+        "w": 10,
+        "x": 0,
+        "y": 6
+      },
+      "id": 47,
+      "options": {
+        "legend": {
+          "calcs": [],
+          "displayMode": "list",
+          "placement": "bottom",
+          "showLegend": true
+        },
+        "tooltip": {
+          "mode": "single",
+          "sort": "none"
+        }
+      },
+      "targets": [
+        {
+          "datasource": {
+            "type": "sni-pnp-datasource"
+          },
+          "host": "Reverse-proxy",
+          "perflabel": "load1",
+          "refId": "A",
+          "service": "Current_Load"
+        },
+        {
+          "datasource": {
+            "type": "sni-pnp-datasource"
+          },
+          "hide": false,
+          "host": "Reverse-proxy",
+          "perflabel": "load5",
+          "refId": "B",
+          "service": "Current_Load"
+        },
+        {
+          "datasource": {
+            "type": "sni-pnp-datasource"
+          },
+          "hide": false,
+          "host": "Reverse-proxy",
+          "perflabel": "load15",
+          "refId": "C",
+          "service": "Current_Load"
+        }
+      ],
+      "title": "CPU Load",
+      "type": "timeseries"
+    },
+    {
+      "datasource": {
+        "type": "sni-pnp-datasource"
+      },
+      "description": "",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "axisCenteredZero": false,
+            "axisColorMode": "text",
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "barAlignment": 0,
+            "drawStyle": "line",
+            "fillOpacity": 0,
+            "gradientMode": "none",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "lineInterpolation": "linear",
+            "lineWidth": 1,
+            "pointSize": 5,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "auto",
+            "spanNulls": false,
+            "stacking": {
+              "group": "A",
+              "mode": "none"
+            },
+            "thresholdsStyle": {
+              "mode": "off"
+            }
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          }
+        },
+        "overrides": [
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "TOTAL"
+            },
+            "properties": [
+              {
+                "id": "color",
+                "value": {
+                  "fixedColor": "dark-red",
+                  "mode": "fixed"
+                }
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "CRITICAL"
+            },
+            "properties": [
+              {
+                "id": "color",
+                "value": {
+                  "fixedColor": "dark-orange",
+                  "mode": "fixed"
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "gridPos": {
+        "h": 8,
+        "w": 14,
+        "x": 10,
+        "y": 8
+      },
+      "id": 45,
+      "options": {
+        "legend": {
+          "calcs": [],
+          "displayMode": "list",
+          "placement": "bottom",
+          "showLegend": true
+        },
+        "tooltip": {
+          "mode": "single",
+          "sort": "none"
+        }
+      },
+      "targets": [
+        {
+          "datasource": {
+            "type": "sni-pnp-datasource"
+          },
+          "host": "Reverse-proxy",
+          "perflabel": "USED",
+          "refId": "A",
+          "service": "RAM"
+        },
+        {
+          "alias": "WARNING",
+          "datasource": {
+            "type": "sni-pnp-datasource"
+          },
+          "hide": false,
+          "host": "Reverse-proxy",
+          "perflabel": "USED",
+          "refId": "B",
+          "service": "RAM",
+          "type": "WARNING"
+        },
+        {
+          "alias": "CRITICAL",
+          "datasource": {
+            "type": "sni-pnp-datasource"
+          },
+          "hide": false,
+          "host": "Reverse-proxy",
+          "perflabel": "USED",
+          "refId": "C",
+          "service": "RAM",
+          "type": "CRITICAL"
+        },
+        {
+          "datasource": {
+            "type": "sni-pnp-datasource"
+          },
+          "hide": false,
+          "host": "Reverse-proxy",
+          "perflabel": "TOTAL",
+          "refId": "D",
+          "service": "RAM"
+        }
+      ],
+      "title": "Memory Information",
+      "type": "timeseries"
+    },
+    {
+      "collapsed": false,
+      "gridPos": {
+        "h": 1,
+        "w": 24,
+        "x": 0,
+        "y": 16
+      },
+      "id": 48,
+      "panels": [],
+      "title": "DNS",
+      "type": "row"
+    },
+    {
+      "datasource": {
+        "type": "sni-pnp-datasource"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          },
+          "unit": "ms"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 4,
+        "w": 5,
+        "x": 0,
+        "y": 17
+      },
+      "id": 49,
+      "options": {
+        "colorMode": "value",
+        "graphMode": "area",
+        "justifyMode": "auto",
+        "orientation": "auto",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "textMode": "auto"
+      },
+      "pluginVersion": "9.5.3",
+      "targets": [
+        {
+          "datasource": {
+            "type": "sni-pnp-datasource"
+          },
+          "host": "DNS",
+          "perflabel": "rta",
+          "refId": "A",
+          "service": "PING"
+        }
+      ],
+      "title": "PING",
+      "type": "stat"
+    },
+    {
+      "datasource": {
+        "type": "sni-pnp-datasource"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          },
+          "unit": "s"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 4,
+        "w": 5,
+        "x": 5,
+        "y": 17
+      },
+      "id": 50,
+      "options": {
+        "colorMode": "value",
+        "graphMode": "area",
+        "justifyMode": "auto",
+        "orientation": "auto",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "textMode": "auto"
+      },
+      "pluginVersion": "9.5.3",
+      "targets": [
+        {
+          "datasource": {
+            "type": "sni-pnp-datasource"
+          },
+          "host": "DNS",
+          "perflabel": "time",
+          "refId": "A",
+          "service": "SSH"
+        }
+      ],
+      "title": "SSH",
+      "type": "stat"
+    },
+    {
+      "datasource": {
+        "type": "sni-pnp-datasource"
+      },
+      "description": "",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "mappings": [],
+          "max": 2030768,
+          "min": 0,
+          "thresholds": {
+            "mode": "percentage",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "#EAB839",
+                "value": 70
+              },
+              {
+                "color": "red",
+                "value": 95
+              }
+            ]
+          },
+          "unit": "deckbytes"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 6,
+        "w": 4,
+        "x": 10,
+        "y": 17
+      },
+      "id": 51,
+      "options": {
+        "orientation": "auto",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "showThresholdLabels": false,
+        "showThresholdMarkers": true
+      },
+      "pluginVersion": "9.5.3",
+      "targets": [
+        {
+          "datasource": {
+            "type": "sni-pnp-datasource"
+          },
+          "host": "DNS",
+          "perflabel": "USED",
+          "refId": "A",
+          "service": "RAM"
+        }
+      ],
+      "title": "Memory Usage",
+      "type": "gauge"
+    },
+    {
+      "datasource": {
+        "type": "sni-pnp-datasource"
+      },
+      "description": "",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "mappings": [],
+          "max": 6520,
+          "min": 0,
+          "thresholds": {
+            "mode": "percentage",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "#EAB839",
+                "value": 70
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          },
+          "unit": "decmbytes"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 6,
+        "w": 4,
+        "x": 14,
+        "y": 17
+      },
+      "id": 52,
+      "options": {
+        "orientation": "auto",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "showThresholdLabels": false,
+        "showThresholdMarkers": true
+      },
+      "pluginVersion": "9.5.3",
+      "targets": [
+        {
+          "alias": "USED",
+          "datasource": {
+            "type": "sni-pnp-datasource"
+          },
+          "host": "DNS",
+          "perflabel": "/",
+          "refId": "A",
+          "service": "Disk",
+          "type": "AVERAGE"
+        }
+      ],
+      "title": "Root Partition Usage",
+      "type": "gauge"
+    },
+    {
+      "datasource": {
+        "type": "sni-pnp-datasource"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "axisCenteredZero": false,
+            "axisColorMode": "text",
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "barAlignment": 0,
+            "drawStyle": "line",
+            "fillOpacity": 0,
+            "gradientMode": "none",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "lineInterpolation": "linear",
+            "lineWidth": 1,
+            "pointSize": 5,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "auto",
+            "spanNulls": false,
+            "stacking": {
+              "group": "A",
+              "mode": "none"
+            },
+            "thresholdsStyle": {
+              "mode": "off"
+            }
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          }
+        },
+        "overrides": [
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Critical"
+            },
+            "properties": [
+              {
+                "id": "color",
+                "value": {
+                  "fixedColor": "red",
+                  "mode": "fixed"
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "gridPos": {
+        "h": 6,
+        "w": 6,
+        "x": 18,
+        "y": 17
+      },
+      "id": 53,
+      "options": {
+        "legend": {
+          "calcs": [],
+          "displayMode": "list",
+          "placement": "bottom",
+          "showLegend": true
+        },
+        "tooltip": {
+          "mode": "single",
+          "sort": "none"
+        }
+      },
+      "targets": [
+        {
+          "alias": "Used",
+          "datasource": {
+            "type": "sni-pnp-datasource"
+          },
+          "host": "DNS",
+          "perflabel": "/",
+          "refId": "A",
+          "service": "Disk"
+        },
+        {
+          "alias": "Warning",
+          "datasource": {
+            "type": "sni-pnp-datasource"
+          },
+          "hide": false,
+          "host": "DNS",
+          "perflabel": "/",
+          "refId": "B",
+          "service": "Disk",
+          "type": "WARNING"
+        },
+        {
+          "alias": "Critical",
+          "datasource": {
+            "type": "sni-pnp-datasource"
+          },
+          "hide": false,
+          "host": "DNS",
+          "perflabel": "/",
+          "refId": "C",
+          "service": "Disk",
+          "type": "CRITICAL"
+        }
+      ],
+      "title": "Root Partition",
+      "type": "timeseries"
+    },
+    {
+      "datasource": {
+        "type": "sni-pnp-datasource"
+      },
+      "description": "",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "axisCenteredZero": false,
+            "axisColorMode": "text",
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "barAlignment": 0,
+            "drawStyle": "line",
+            "fillOpacity": 10,
+            "gradientMode": "opacity",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "lineInterpolation": "linear",
+            "lineStyle": {
+              "fill": "solid"
+            },
+            "lineWidth": 1,
+            "pointSize": 4,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "auto",
+            "spanNulls": false,
+            "stacking": {
+              "group": "A",
+              "mode": "none"
+            },
+            "thresholdsStyle": {
+              "mode": "off"
+            }
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          }
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 10,
+        "w": 10,
+        "x": 0,
+        "y": 21
+      },
+      "id": 55,
+      "options": {
+        "legend": {
+          "calcs": [],
+          "displayMode": "list",
+          "placement": "bottom",
+          "showLegend": true
+        },
+        "tooltip": {
+          "mode": "single",
+          "sort": "none"
+        }
+      },
+      "targets": [
+        {
+          "datasource": {
+            "type": "sni-pnp-datasource"
+          },
+          "host": "DNS",
+          "perflabel": "load1",
+          "refId": "A",
+          "service": "Current_Load"
+        },
+        {
+          "datasource": {
+            "type": "sni-pnp-datasource"
+          },
+          "hide": false,
+          "host": "DNS",
+          "perflabel": "load5",
+          "refId": "B",
+          "service": "Current_Load"
+        },
+        {
+          "datasource": {
+            "type": "sni-pnp-datasource"
+          },
+          "hide": false,
+          "host": "DNS",
+          "perflabel": "load15",
+          "refId": "C",
+          "service": "Current_Load"
+        }
+      ],
+      "title": "CPU Load",
+      "type": "timeseries"
+    },
+    {
+      "datasource": {
+        "type": "sni-pnp-datasource"
+      },
+      "description": "",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "axisCenteredZero": false,
+            "axisColorMode": "text",
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "barAlignment": 0,
+            "drawStyle": "line",
+            "fillOpacity": 0,
+            "gradientMode": "none",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "lineInterpolation": "linear",
+            "lineWidth": 1,
+            "pointSize": 5,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "auto",
+            "spanNulls": false,
+            "stacking": {
+              "group": "A",
+              "mode": "none"
+            },
+            "thresholdsStyle": {
+              "mode": "off"
+            }
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          }
+        },
+        "overrides": [
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "TOTAL"
+            },
+            "properties": [
+              {
+                "id": "color",
+                "value": {
+                  "fixedColor": "dark-red",
+                  "mode": "fixed"
+                }
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "CRITICAL"
+            },
+            "properties": [
+              {
+                "id": "color",
+                "value": {
+                  "fixedColor": "dark-orange",
+                  "mode": "fixed"
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "gridPos": {
+        "h": 8,
+        "w": 14,
+        "x": 10,
+        "y": 23
+      },
+      "id": 54,
+      "options": {
+        "legend": {
+          "calcs": [],
+          "displayMode": "list",
+          "placement": "bottom",
+          "showLegend": true
+        },
+        "tooltip": {
+          "mode": "single",
+          "sort": "none"
+        }
+      },
+      "targets": [
+        {
+          "datasource": {
+            "type": "sni-pnp-datasource"
+          },
+          "host": "DNS",
+          "perflabel": "USED",
+          "refId": "A",
+          "service": "RAM"
+        },
+        {
+          "alias": "WARNING",
+          "datasource": {
+            "type": "sni-pnp-datasource"
+          },
+          "hide": false,
+          "host": "DNS",
+          "perflabel": "USED",
+          "refId": "B",
+          "service": "RAM",
+          "type": "WARNING"
+        },
+        {
+          "alias": "CRITICAL",
+          "datasource": {
+            "type": "sni-pnp-datasource"
+          },
+          "hide": false,
+          "host": "DNS",
+          "perflabel": "USED",
+          "refId": "C",
+          "service": "RAM",
+          "type": "CRITICAL"
+        },
+        {
+          "datasource": {
+            "type": "sni-pnp-datasource"
+          },
+          "hide": false,
+          "host": "DNS",
+          "perflabel": "TOTAL",
+          "refId": "D",
+          "service": "RAM"
+        }
+      ],
+      "title": "Memory Information",
+      "type": "timeseries"
+    },
+    {
+      "collapsed": false,
+      "gridPos": {
+        "h": 1,
+        "w": 24,
+        "x": 0,
+        "y": 31
+      },
+      "id": 16,
+      "panels": [],
+      "title": "Router",
+      "type": "row"
+    },
+    {
+      "datasource": {},
+      "fieldConfig": {
+        "defaults": {
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          },
+          "unit": "ms"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 4,
+        "w": 3,
+        "x": 0,
+        "y": 32
+      },
+      "id": 31,
+      "options": {
+        "colorMode": "value",
+        "graphMode": "area",
+        "justifyMode": "auto",
+        "orientation": "auto",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "textMode": "auto"
+      },
+      "pluginVersion": "9.5.3",
+      "targets": [
+        {
+          "datasource": {
+            "type": "sni-pnp-datasource"
+          },
+          "host": "Router",
+          "perflabel": "rta",
+          "refId": "A",
+          "service": "PING"
+        }
+      ],
+      "title": "PING",
+      "type": "stat"
+    },
+    {
+      "datasource": {},
+      "fieldConfig": {
+        "defaults": {
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              }
+            ]
+          },
+          "unit": "timeticks"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 4,
+        "w": 5,
+        "x": 3,
+        "y": 32
+      },
+      "id": 27,
+      "options": {
+        "colorMode": "none",
+        "graphMode": "none",
+        "justifyMode": "auto",
+        "orientation": "auto",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "textMode": "auto"
+      },
+      "pluginVersion": "9.5.3",
+      "targets": [
+        {
+          "alias": "time",
+          "datasource": {
+            "type": "sni-pnp-datasource"
+          },
+          "host": "Router",
+          "perflabel": "iso.3.6.1.2.1.1.3.0",
+          "refId": "A",
+          "service": "Uptime"
+        }
+      ],
+      "title": "Uptime",
+      "type": "stat"
+    },
+    {
+      "datasource": {},
+      "fieldConfig": {
+        "defaults": {
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          },
+          "unit": "s"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 4,
+        "w": 3,
+        "x": 8,
+        "y": 32
+      },
+      "id": 30,
+      "options": {
+        "colorMode": "value",
+        "graphMode": "area",
+        "justifyMode": "auto",
+        "orientation": "auto",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "textMode": "auto"
+      },
+      "pluginVersion": "9.5.3",
+      "targets": [
+        {
+          "datasource": {
+            "type": "sni-pnp-datasource"
+          },
+          "host": "Router",
+          "perflabel": "time",
+          "refId": "A",
+          "service": "SSH"
+        }
+      ],
+      "title": "SSH",
+      "type": "stat"
+    },
+    {
+      "datasource": {},
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "axisCenteredZero": false,
+            "axisColorMode": "text",
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "barAlignment": 0,
+            "drawStyle": "line",
+            "fillOpacity": 0,
+            "gradientMode": "none",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "lineInterpolation": "linear",
+            "lineWidth": 1,
+            "pointSize": 5,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "auto",
+            "spanNulls": false,
+            "stacking": {
+              "group": "A",
+              "mode": "none"
+            },
+            "thresholdsStyle": {
+              "mode": "off"
+            }
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          }
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 8,
+        "w": 9,
+        "x": 11,
+        "y": 32
+      },
+      "id": 6,
+      "options": {
+        "legend": {
+          "calcs": [],
+          "displayMode": "list",
+          "placement": "bottom",
+          "showLegend": true
+        },
+        "tooltip": {
+          "mode": "single",
+          "sort": "none"
+        }
+      },
+      "targets": [
+        {
+          "alias": "CPU Load 1 minute",
+          "datasource": {
+            "type": "sni-pnp-datasource"
+          },
+          "host": "Router",
+          "perflabel": "iso.3.6.1.4.1.9.2.1.57.0",
+          "refId": "A",
+          "service": "CPU_Load_1m-5m"
+        },
+        {
+          "alias": "CPU Load 5 minutes",
+          "datasource": {
+            "type": "sni-pnp-datasource"
+          },
+          "hide": false,
+          "host": "Router",
+          "perflabel": "iso.3.6.1.4.1.9.2.1.58.0",
+          "refId": "B",
+          "service": "CPU_Load_1m-5m"
+        }
+      ],
+      "title": "CPU Load",
+      "type": "timeseries"
+    },
+    {
+      "datasource": {
+        "type": "sni-pnp-datasource"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "continuous-GrYlRd"
+          },
+          "custom": {
+            "fillOpacity": 70,
+            "lineWidth": 0,
+            "spanNulls": false
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          }
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 7,
+        "w": 6,
+        "x": 0,
+        "y": 36
+      },
+      "id": 28,
+      "options": {
+        "alignValue": "left",
+        "legend": {
+          "displayMode": "list",
+          "placement": "bottom",
+          "showLegend": true
+        },
+        "mergeValues": true,
+        "rowHeight": 0.9,
+        "showValue": "auto",
+        "tooltip": {
+          "mode": "single",
+          "sort": "none"
+        }
+      },
+      "targets": [
+        {
+          "alias": "Em0/0",
+          "datasource": {
+            "type": "sni-pnp-datasource"
+          },
+          "factor": "",
+          "host": "Router",
+          "perflabel": "iso.3.6.1.2.1.2.2.1.8.1",
+          "refId": "A",
+          "service": "Interfaces_Info"
+        },
+        {
+          "alias": "G10/0",
+          "datasource": {
+            "type": "sni-pnp-datasource"
+          },
+          "hide": false,
+          "host": "Router",
+          "perflabel": "iso.3.6.1.2.1.2.2.1.8.2",
+          "refId": "B",
+          "service": "Interfaces_Info"
+        },
+        {
+          "alias": "Gi0/1",
+          "datasource": {
+            "type": "sni-pnp-datasource"
+          },
+          "hide": false,
+          "host": "Router",
+          "perflabel": "iso.3.6.1.2.1.2.2.1.8.3",
+          "refId": "C",
+          "service": "Interfaces_Info"
+        },
+        {
+          "alias": "Gi0/2",
+          "datasource": {
+            "type": "sni-pnp-datasource"
+          },
+          "hide": false,
+          "host": "Router",
+          "perflabel": "iso.3.6.1.2.1.2.2.1.8.4",
+          "refId": "D",
+          "service": "Interfaces_Info"
+        },
+        {
+          "alias": "Gi0/3",
+          "datasource": {
+            "type": "sni-pnp-datasource"
+          },
+          "hide": false,
+          "host": "Router",
+          "perflabel": "iso.3.6.1.2.1.2.2.1.8.5",
+          "refId": "E",
+          "service": "Interfaces_Info"
+        },
+        {
+          "alias": "Gi0/1.10",
+          "datasource": {
+            "type": "sni-pnp-datasource"
+          },
+          "hide": false,
+          "host": "Router",
+          "perflabel": "iso.3.6.1.2.1.2.2.1.8.7",
+          "refId": "F",
+          "service": "Interfaces_Info"
+        },
+        {
+          "alias": "Gi0/1.20",
+          "datasource": {
+            "type": "sni-pnp-datasource"
+          },
+          "hide": false,
+          "host": "Router",
+          "perflabel": "iso.3.6.1.2.1.2.2.1.8.8",
+          "refId": "G",
+          "service": "Interfaces_Info"
+        },
+        {
+          "alias": "Gi0/1.30",
+          "datasource": {
+            "type": "sni-pnp-datasource"
+          },
+          "hide": false,
+          "host": "Router",
+          "perflabel": "iso.3.6.1.2.1.2.2.1.8.9",
+          "refId": "H",
+          "service": "Interfaces_Info"
+        },
+        {
+          "alias": "Gi0/1.40",
+          "datasource": {
+            "type": "sni-pnp-datasource"
+          },
+          "hide": false,
+          "host": "Router",
+          "perflabel": "iso.3.6.1.2.1.2.2.1.8.11",
+          "refId": "I",
+          "service": "Interfaces_Info"
+        }
+      ],
+      "title": "Interfaces State (1-up,2-down)",
+      "type": "state-timeline"
+    },
+    {
+      "datasource": {},
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            }
+          },
+          "mappings": []
+        },
+        "overrides": [
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Free"
+            },
+            "properties": [
+              {
+                "id": "color",
+                "value": {
+                  "fixedColor": "green",
+                  "mode": "fixed"
+                }
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Used"
+            },
+            "properties": [
+              {
+                "id": "color",
+                "value": {
+                  "fixedColor": "light-orange",
+                  "mode": "fixed"
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "gridPos": {
+        "h": 7,
+        "w": 5,
+        "x": 6,
+        "y": 36
+      },
+      "id": 29,
+      "options": {
+        "displayLabels": [
+          "percent"
+        ],
+        "legend": {
+          "displayMode": "list",
+          "placement": "right",
+          "showLegend": true,
+          "values": []
+        },
+        "pieType": "pie",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "tooltip": {
+          "mode": "single",
+          "sort": "none"
+        }
+      },
+      "targets": [
+        {
+          "alias": "Used",
+          "datasource": {
+            "type": "sni-pnp-datasource"
+          },
+          "host": "Router",
+          "perflabel": "iso.3.6.1.4.1.9.9.48.1.1.1.5.1",
+          "refId": "A",
+          "service": "Memory_Name-Used-Free"
+        },
+        {
+          "alias": "Free",
+          "datasource": {
+            "type": "sni-pnp-datasource"
+          },
+          "hide": false,
+          "host": "Router",
+          "perflabel": "iso.3.6.1.4.1.9.9.48.1.1.1.6.1",
+          "refId": "B",
+          "service": "Memory_Name-Used-Free"
+        }
+      ],
+      "title": "Memory Space",
+      "type": "piechart"
+    },
+    {
+      "collapsed": false,
+      "gridPos": {
+        "h": 1,
+        "w": 24,
+        "x": 0,
+        "y": 43
+      },
+      "id": 15,
+      "panels": [],
+      "title": "Switch",
+      "type": "row"
+    },
+    {
+      "datasource": {},
+      "fieldConfig": {
+        "defaults": {
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          },
+          "unit": "ms"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 4,
+        "w": 3,
+        "x": 0,
+        "y": 44
+      },
+      "id": 10,
+      "options": {
+        "colorMode": "value",
+        "graphMode": "area",
+        "justifyMode": "auto",
+        "orientation": "auto",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "textMode": "auto"
+      },
+      "pluginVersion": "9.5.3",
+      "targets": [
+        {
+          "datasource": {
+            "type": "sni-pnp-datasource"
+          },
+          "host": "Switch",
+          "perflabel": "rta",
+          "refId": "A",
+          "service": "PING"
+        }
+      ],
+      "title": "Switch PING",
+      "type": "stat"
+    },
+    {
+      "datasource": {},
+      "fieldConfig": {
+        "defaults": {
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              }
+            ]
+          },
+          "unit": "timeticks"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 4,
+        "w": 5,
+        "x": 3,
+        "y": 44
+      },
+      "id": 37,
+      "options": {
+        "colorMode": "none",
+        "graphMode": "none",
+        "justifyMode": "auto",
+        "orientation": "auto",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "textMode": "auto"
+      },
+      "pluginVersion": "9.5.3",
+      "targets": [
+        {
+          "alias": "time",
+          "datasource": {
+            "type": "sni-pnp-datasource"
+          },
+          "host": "Switch",
+          "perflabel": "iso.3.6.1.2.1.1.3.0",
+          "refId": "A",
+          "service": "Uptime"
+        }
+      ],
+      "title": "Uptime",
+      "type": "stat"
+    },
+    {
+      "datasource": {},
+      "fieldConfig": {
+        "defaults": {
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          },
+          "unit": "s"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 4,
+        "w": 3,
+        "x": 8,
+        "y": 44
+      },
+      "id": 36,
+      "options": {
+        "colorMode": "value",
+        "graphMode": "area",
+        "justifyMode": "auto",
+        "orientation": "auto",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "textMode": "auto"
+      },
+      "pluginVersion": "9.5.3",
+      "targets": [
+        {
+          "datasource": {
+            "type": "sni-pnp-datasource"
+          },
+          "host": "Switch",
+          "perflabel": "time",
+          "refId": "A",
+          "service": "SSH"
+        }
+      ],
+      "title": "SSH",
+      "type": "stat"
+    },
+    {
+      "datasource": {},
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "axisCenteredZero": false,
+            "axisColorMode": "text",
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "barAlignment": 0,
+            "drawStyle": "line",
+            "fillOpacity": 0,
+            "gradientMode": "none",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "lineInterpolation": "linear",
+            "lineWidth": 1,
+            "pointSize": 5,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "auto",
+            "spanNulls": false,
+            "stacking": {
+              "group": "A",
+              "mode": "none"
+            },
+            "thresholdsStyle": {
+              "mode": "off"
+            }
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          }
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 8,
+        "w": 9,
+        "x": 11,
+        "y": 44
+      },
+      "id": 33,
+      "options": {
+        "legend": {
+          "calcs": [],
+          "displayMode": "list",
+          "placement": "bottom",
+          "showLegend": true
+        },
+        "tooltip": {
+          "mode": "single",
+          "sort": "none"
+        }
+      },
+      "targets": [
+        {
+          "alias": "CPU Load 1 minute",
+          "datasource": {
+            "type": "sni-pnp-datasource"
+          },
+          "host": "Switch",
+          "perflabel": "iso.3.6.1.4.1.9.2.1.57.0",
+          "refId": "A",
+          "service": "CPU_Load_1m-5m"
+        },
+        {
+          "alias": "CPU Load 5 minutes",
+          "datasource": {
+            "type": "sni-pnp-datasource"
+          },
+          "hide": false,
+          "host": "Switch",
+          "perflabel": "iso.3.6.1.4.1.9.2.1.58.0",
+          "refId": "B",
+          "service": "CPU_Load_1m-5m"
+        }
+      ],
+      "title": "CPU Load",
+      "type": "timeseries"
+    },
+    {
+      "datasource": {
+        "type": "sni-pnp-datasource"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "continuous-GrYlRd"
+          },
+          "custom": {
+            "fillOpacity": 70,
+            "lineWidth": 0,
+            "spanNulls": false
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          }
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 7,
+        "w": 6,
+        "x": 0,
+        "y": 48
+      },
+      "id": 34,
+      "options": {
+        "alignValue": "left",
+        "legend": {
+          "displayMode": "list",
+          "placement": "bottom",
+          "showLegend": true
+        },
+        "mergeValues": true,
+        "rowHeight": 0.9,
+        "showValue": "auto",
+        "tooltip": {
+          "mode": "single",
+          "sort": "none"
+        }
+      },
+      "targets": [
+        {
+          "alias": "Vlan 40",
+          "datasource": {
+            "type": "sni-pnp-datasource"
+          },
+          "host": "Switch",
+          "perflabel": "iso.3.6.1.2.1.2.2.1.8.40",
+          "refId": "A",
+          "service": "Interfaces_Info"
+        },
+        {
+          "alias": "Fa0/2",
+          "datasource": {
+            "type": "sni-pnp-datasource"
+          },
+          "hide": false,
+          "host": "Switch",
+          "perflabel": "iso.3.6.1.2.1.2.2.1.8.10002",
+          "refId": "B",
+          "service": "Interfaces_Info"
+        },
+        {
+          "alias": "Fa0/4",
+          "datasource": {
+            "type": "sni-pnp-datasource"
+          },
+          "hide": false,
+          "host": "Switch",
+          "perflabel": "iso.3.6.1.2.1.2.2.1.8.10004",
+          "refId": "C",
+          "service": "Interfaces_Info"
+        },
+        {
+          "alias": "Fa0/6",
+          "datasource": {
+            "type": "sni-pnp-datasource"
+          },
+          "hide": false,
+          "host": "Switch",
+          "perflabel": "iso.3.6.1.2.1.2.2.1.8.10006",
+          "refId": "D",
+          "service": "Interfaces_Info"
+        },
+        {
+          "alias": "Fa0/8",
+          "datasource": {
+            "type": "sni-pnp-datasource"
+          },
+          "hide": false,
+          "host": "Switch",
+          "perflabel": "iso.3.6.1.2.1.2.2.1.8.10008",
+          "refId": "E",
+          "service": "Interfaces_Info"
+        },
+        {
+          "alias": "Gi0/1",
+          "datasource": {
+            "type": "sni-pnp-datasource"
+          },
+          "hide": false,
+          "host": "Switch",
+          "perflabel": "iso.3.6.1.2.1.2.2.1.8.10101",
+          "refId": "F",
+          "service": "Interfaces_Info"
+        }
+      ],
+      "title": "Interfaces State (1-up,2-down)",
+      "type": "state-timeline"
+    },
+    {
+      "datasource": {},
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            }
+          },
+          "mappings": []
+        },
+        "overrides": [
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Free"
+            },
+            "properties": [
+              {
+                "id": "color",
+                "value": {
+                  "fixedColor": "green",
+                  "mode": "fixed"
+                }
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Used"
+            },
+            "properties": [
+              {
+                "id": "color",
+                "value": {
+                  "fixedColor": "light-orange",
+                  "mode": "fixed"
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "gridPos": {
+        "h": 7,
+        "w": 5,
+        "x": 6,
+        "y": 48
+      },
+      "id": 35,
+      "options": {
+        "displayLabels": [
+          "percent"
+        ],
+        "legend": {
+          "displayMode": "list",
+          "placement": "right",
+          "showLegend": true,
+          "values": []
+        },
+        "pieType": "pie",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "tooltip": {
+          "mode": "single",
+          "sort": "none"
+        }
+      },
+      "targets": [
+        {
+          "alias": "Used",
+          "datasource": {
+            "type": "sni-pnp-datasource"
+          },
+          "host": "Switch",
+          "perflabel": "iso.3.6.1.4.1.9.9.48.1.1.1.5.1",
+          "refId": "A",
+          "service": "Memory_Name-Used-Free"
+        },
+        {
+          "alias": "Free",
+          "datasource": {
+            "type": "sni-pnp-datasource"
+          },
+          "hide": false,
+          "host": "Switch",
+          "perflabel": "iso.3.6.1.4.1.9.9.48.1.1.1.6.1",
+          "refId": "B",
+          "service": "Memory_Name-Used-Free"
+        }
+      ],
+      "title": "Memory Space",
+      "type": "piechart"
+    }
+  ],
+  "refresh": "",
+  "revision": 1,
+  "schemaVersion": 38,
+  "style": "dark",
+  "tags": [],
+  "templating": {
+    "list": []
+  },
+  "time": {
+    "from": "now-6h",
+    "to": "now"
+  },
+  "timepicker": {
+    "hidden": false,
+    "refresh_intervals": [
+      "5s",
+      "10s",
+      "30s",
+      "1m",
+      "5m",
+      "15m",
+      "30m",
+      "1h",
+      "2h",
+      "1d"
+    ],
+    "time_options": [
+      "5m",
+      "15m",
+      "1h",
+      "6h",
+      "12h",
+      "24h",
+      "2d",
+      "7d",
+      "30d"
+    ],
+    "type": "timepicker"
+  },
+  "timezone": "browser",
+  "title": "Network",
+  "uid": "E1rv-5EVz",
+  "version": 4,
+  "weekStart": ""
+}

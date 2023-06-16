@@ -1,0 +1,149 @@
+- name: Install and configure NetBox
+  hosts: localhost
+  become: true
+  tasks:
+    - name: Install Redis Server
+      apt:
+        name: redis-server
+        state: present
+
+    - name: Install Python and dependencies
+      apt:
+        name: "{{ item }}"
+        state: present
+      with_items:
+        - python3
+        - python3-pip
+        - python3-venv
+        - python3-dev
+        - build-essential
+        - libxml2-dev
+        - libxslt1-dev
+        - libffi-dev
+        - libpq-dev
+        - libssl-dev
+        - zlib1g-dev
+
+    - name: Download NetBox
+      get_url:
+        url: "https://github.com/netbox-community/netbox/archive/refs/tags/v3.0.0.tar.gz"
+        dest: "/opt/v3.0.0.tar.gz"
+
+    - name: Extract NetBox archive
+      unarchive:
+        src: "/opt/v3.0.0.tar.gz"
+        dest: "/opt/"
+        remote_src: yes
+
+    - name: Create symbolic link for NetBox
+      file:
+        src: "/opt/netbox-3.0.0/"
+        dest: "/opt/netbox"
+        state: link
+
+    - name: Créer le groupe
+      group:
+        name: netbox
+        state: present
+
+    - name: Create NetBox system user
+      user:
+        name: netbox
+        system: yes
+        group: netbox
+
+    - name: Set ownership of media directory
+      file:
+        path: "/opt/netbox/netbox/media/"
+        owner: netbox
+        state: directory
+        recurse: yes
+
+    - name: Set ownership of reports directory
+      file:
+        path: "/opt/netbox/netbox/reports/"
+        owner: netbox
+        state: directory
+        recurse: yes
+
+    - name: Set ownership of scripts directory
+      file:
+        path: "/opt/netbox/netbox/scripts/"
+        owner: netbox
+        state: directory
+        recurse: yes
+
+    - name: Copy NetBox configuration file
+      copy:
+        src: "/vagrant/data/configuration.py"
+        dest: "/opt/netbox/netbox/netbox/configuration.py"
+
+    - name: Run NetBox upgrade script
+      shell: /opt/netbox/upgrade.sh
+
+    - name: Activate NetBox virtual environment
+      shell: bash /vagrant/data/script.sh
+
+    - name: Create symbolic link for NetBox housekeeping script
+      file:
+        src: "/opt/netbox/contrib/netbox-housekeeping.sh"
+        dest: "/etc/cron.daily/netbox-housekeeping"
+        state: link
+
+    - name: Copy Gunicorn configuration file
+      copy:
+        src: "/opt/netbox/contrib/gunicorn.py"
+        dest: "/opt/netbox/gunicorn.py"
+
+    - name: Copy NetBox systemd service files
+      copy:
+        src: "/opt/netbox/contrib/{{ item }}"
+        dest: "/etc/systemd/system/"
+      with_items:
+        - netbox.service
+        - netbox-rq.service
+
+    - name: Reload systemd daemon
+      systemd:
+        daemon_reload: yes
+
+    - name: Start and enable NetBox services
+      systemd:
+        name: "{{ item }}"
+        state: started
+        enabled: yes
+      with_items:
+        - netbox
+        - netbox-rq
+
+    - name: Install Apache2
+      apt:
+        name: apache2
+        state: present
+
+    - name: Copy NetBox Apache configuration file
+      copy:
+        src: "/vagrant/data/netbox.conf"
+        dest: "/etc/apache2/sites-available/netbox.conf"
+
+    - name: Enable required Apache modules
+      apache2_module:
+        state: present
+        name: "{{ item }}"
+      with_items:
+        - ssl
+        - proxy
+        - proxy_http
+        - headers
+        - rewrite
+
+    - name: Enable NetBox Apache site
+      command: a2ensite netbox.conf
+
+    - name: Disable default Apache site
+      command: a2dissite 000-default.conf
+
+    - name: Restart Apache2
+      service:
+        name: apache2
+        state: restarted

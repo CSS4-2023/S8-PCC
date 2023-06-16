@@ -1,0 +1,10 @@
+logs/*.log
+.vagrant/**
+packer_debian/output-virtualbox-iso
+packer_debian/*.box
+bup_day_db_web/*.sql
+bup_hour_db_web/*.sql
+data/backup_token
+data/passwd_token
+data/backup_key
+data/passwd

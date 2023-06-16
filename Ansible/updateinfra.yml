@@ -1,0 +1,49 @@
+---
+- name: Exécution de la commande Python DB Gitea
+  hosts: DBgitea.e4.sirt.tp
+  tasks:
+    - name: Exécuter la commande Python DB Gitea
+      command: python3 /vagrant/data/netbox.py
+    - name: Exécuter la commande Wazuh
+      command: systemctl restart wazuh-agent
+
+- name: Exécution de la commande Python Gitea
+  hosts: Gitea.e4.sirt.tp
+  tasks:
+    - name: Exécuter la commande Python Gitea
+      command: python3 /vagrant/data/netbox.py
+    - name: Exécuter la commande Wazuh
+      command: systemctl restart wazuh-agent
+
+- name: Exécution de la commande Python Vault
+  hosts: Vault.e4.sirt.tp
+  tasks:
+    - name: Exécuter la commande Python Vault
+      command: python3 /vagrant/data/netbox.py
+    - name: Exécuter la commande Wazuh
+      command: systemctl restart wazuh-agent
+
+- name: Exécution de la commande Python RP-Apache
+  hosts: 172.16.2.21
+  tasks:
+    - name: Exécuter la commande Python RP-Apache
+      command: python3 /vagrant/data/netbox.py
+    - name: Exécuter la commande Wazuh
+      command: systemctl restart wazuh-agent
+
+- name: Exécution de la commande Python LB-haproxy
+  hosts: 172.16.2.20
+  tasks:
+    - name: Exécuter la commande Python LB-haproxy
+      command: python3 /vagrant/data/netbox.py
+    - name: Exécuter la commande Wazuh
+      command: systemctl restart wazuh-agent
+
+
+- name: Exécution de la commande Python DNS
+  hosts: 172.16.2.36
+  tasks:
+    - name: Exécuter la commande Python DNS
+      command: python3 /vagrant/data/netbox.py
+    - name: Exécuter la commande Wazuh
+      command: systemctl restart wazuh-agent

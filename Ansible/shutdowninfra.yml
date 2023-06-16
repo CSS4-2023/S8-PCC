@@ -1,0 +1,126 @@
+---
+- name: Shutdown Reverse-proxy Server
+  hosts: 172.16.2.17
+  vars:
+    dir: /home/ansible/VM-rp-apache
+  tasks:
+    - name: Vagrant destroy Reverse-proxy Server
+      become: false
+      shell: vagrant destroy -f
+      args:
+        chdir: "{{ dir }}"
+
+- name: Shutdown Vault Server
+  hosts: localhost
+  vars:
+    dir: /home/etudis/Bureau/VM-vault
+  tasks:
+    - name: Vagrant destroy Vault Server
+      shell: vagrant destroy -f
+      args:
+        chdir: "{{ dir }}"
+
+- name: Shutdown MySQL DB Server for Gitea
+  hosts: Cauchy17.e4.sirt.tp
+  vars:
+    dir: /home/ansible/VM-db-gitea
+  tasks:
+    - name: Vagrant destroy MySQL DB Server for Gitea
+      become: false
+      shell: vagrant destroy -f
+      args:
+        chdir: "{{ dir }}"
+
+- name: Shutdown Gitea Server
+  hosts: localhost
+  vars:
+    dir: /home/etudis/Bureau/VM-gitea
+  tasks:
+    - name: Vagrant destroy Gitea Server
+      shell: vagrant destroy -f
+      args:
+        chdir: "{{ dir }}"
+
+- name: Shutdown DB Server for Netbox
+  hosts: Cauchy17.e4.sirt.tp
+  vars:
+    dir: /home/ansible/VM-db-netbox
+  tasks:
+    - name: Vagrant destroy DB Server for Netbox
+      become: false
+      shell: vagrant destroy -f
+      args:
+        chdir: "{{ dir }}"
+
+- name: Shutdown Supervision Server
+  hosts: localhost
+  vars:
+    dir: /home/etudis/Bureau/VM-supervision
+  tasks:
+    - name: Vagrant destroy Supervision Server
+      shell: vagrant destroy -f
+      args:
+        chdir: "{{ dir }}"
+
+- name: Shutdown MySQL DB Server for Wordpress
+  hosts: Cauchy17.e4.sirt.tp
+  vars:
+    dir: /home/ansible/VM-db-web
+  tasks:
+    - name: Vagrant destroy MySQL DB Server for Wordpress
+      become: false
+      shell: vagrant destroy -f
+      args:
+        chdir: "{{ dir }}"
+
+- name: Shutdown Web1 Server
+  hosts: Cauchy13.e4.sirt.tp
+  vars:
+    dir: /home/ansible/VM-web
+  tasks:
+    - name: Vagrant destroy Wordpress Server
+      become: false
+      command: vagrant destroy -f
+      args:
+        chdir: "{{ dir }}"
+
+- name: Shutdown Jenkins Server
+  hosts: localhost
+  vars:
+    dir: /home/etudis/Bureau/VM-jenkins
+  tasks:
+    - name: Vagrant destroy Jenkins Server
+      command: vagrant destroy -f
+      args:
+        chdir: "{{ dir }}"
+
+- name: Shutdown Web2 Server
+  hosts: Cauchy13.e4.sirt.tp
+  vars:
+    dir: /home/ansible/VM-web
+  tasks:
+    - name: Vagrant destroy Wordpress Server
+      become: false
+      command: vagrant destroy -f
+      args:
+        chdir: "{{ dir }}"
+
+- name: Shutdown Netbox Server
+  hosts: Cauchy18.e4.sirt.tp
+  vars:
+    dir: /home/ansible/VM-netbox
+  tasks:
+    - name: Vagrant destroy Netbox Server
+      shell: vagrant destroy -f
+      args:
+        chdir: "{{ dir }}"
+
+- name: Shutdown Wazuh Server
+  hosts: Cauchy18.e4.sirt.tp
+  vars:
+    dir: /home/ansible/VM-wazuh
+  tasks:
+    - name: Vagrant destroy Wazuh Server
+      shell: vagrant destroy -f
+      args:
+        chdir: "{{ dir }}"

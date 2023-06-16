@@ -1,0 +1,105 @@
+---
+- name: Clean Reverse-proxy Server
+  hosts: Cauchy16.e4.sirt.tp
+  vars:
+    dir: /home/ansible/VM-rp-apache
+  tasks:
+    - name: Clean cache for Reverse-proxy Server
+      shell: sudo rm -rf "{{ dir }}"
+
+- name: Clean Vault Server
+  hosts: localhost
+  vars:
+    dir: /home/etudis/Bureau/VM-vault
+  tasks:
+    - name: Clean cache for Vault Server
+      shell: sudo rm -rf "{{ dir }}"
+
+- name: Clean MySQL DB Server for Gitea
+  hosts: Cauchy17.e4.sirt.tp
+  vars:
+    dir: /home/ansible/VM-db-gitea
+  tasks:
+    - name: Clean cache for MySQL DB Server
+      shell: sudo rm -rf "{{ dir }}"
+
+- name: Clean Gitea Server
+  hosts: localhost
+  vars:
+    dir: /home/etudis/Bureau/VM-gitea
+  tasks:
+    - name: Clean cache for Gitea Server
+      shell: sudo rm -rf "{{ dir }}"
+
+- name: Clean DB Server for Netbox
+  hosts: Cauchy17.e4.sirt.tp
+  vars:
+    dir: /home/ansible/VM-db-netbox
+  tasks:
+    - name: Clean cache for DB Server
+      shell: sudo rm -rf "{{ dir }}"
+
+- name: Clean Netbox Server
+  hosts: Cauchy18.e4.sirt.tp
+  vars:
+    dir: /home/etudis/Bureau/VM-netbox
+  tasks:
+    - name: Clean cache for Netbox Server
+      shell: sudo rm -rf "{{ dir }}"
+
+- name: Clean Wazuh Server
+  hosts: Cauchy18.e4.sirt.tp
+  vars:
+    dir: /home/etudis/Bureau/VM-wazuh
+  tasks:
+    - name: Clean cache for Wazuh Server
+      shell: sudo rm -rf "{{ dir }}"
+
+- name: Clean Supervision Server
+  hosts: localhost
+  vars:
+    dir: /home/etudis/Bureau/VM-supervision
+  tasks:
+    - name: Clean cache for Supervision Server
+      shell: sudo rm -rf "{{ dir }}"
+
+- name: Clean MySQL DB Server for Wordpress
+  hosts: Cauchy17.e4.sirt.tp
+  vars:
+    dir: /home/ansible/VM-db-web
+  tasks:
+    - name: Clean cache for Wordpress Server
+      shell: sudo rm -rf "{{ dir }}"
+
+- name: Clean Web1 Server
+  hosts: Cauchy13.e4.sirt.tp
+  vars:
+    dir: /home/ansible/VM-web
+  tasks:
+    - name: Clean cache for Wordpress Server
+      shell: sudo rm -rf "{{ dir }}"
+
+- name: Clean Jenkins Server
+  hosts: localhost
+  vars:
+    dir: /home/etudis/Bureau/VM-jenkins
+  tasks:
+    - name: Clean cache for Jenkins Server
+      shell: sudo rm -rf "{{ dir }}"
+
+- name: Clean Web2 Server
+  hosts: Cauchy13.e4.sirt.tp
+  vars:
+    dir: /home/ansible/VM-web2
+  tasks:
+    - name: Clean cache for Wordpress Server
+      shell: sudo rm -rf "{{ dir }}"
+
+- name: Clean local host
+  hosts: localhost
+  vars:
+    vm_folder: /home/etudis/Bureau/vm
+    git_folder: /home/etudis/Bureau/S8-PCC4
+  tasks:
+    - name: Clean local host
+      shell: sudo rm -rf "{{ vm_folder }}" "{{ git_folder }}"

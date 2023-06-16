@@ -1,0 +1,6 @@
+logs/*.log
+.vagrant/**
+packer_debian/output-virtualbox-iso
+packer_debian/*.box
+data/backup_key
+data/backup_token

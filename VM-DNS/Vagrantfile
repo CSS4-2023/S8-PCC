@@ -1,0 +1,31 @@
+# -*- mode: ruby -*-
+# vi: set ft=ruby :
+
+Vagrant.configure("2") do |config|
+
+  config.vm.define "VM-DNS" do |machine|
+    machine.vm.hostname = "VM-DNS"
+    machine.vm.box = "chavinje/fr-bull-64"
+    machine.vm.network :public_network, ip: "172.16.2.36",bridge:"eno1", netmask:"255.255.255.240"
+
+    machine.vm.provider :virtualbox do |v|
+      v.customize ["modifyvm", :id, "--name", "VM-DNS"]
+      v.customize ["modifyvm", :id, "--groups", "/S8-projet"]
+      v.customize ["modifyvm", :id, "--cpus", "1"]
+      v.customize ["modifyvm", :id, "--memory", 2048]
+      v.customize ["modifyvm", :id, "--natdnshostresolver1", "off"]
+      v.customize ["modifyvm", :id, "--natdnsproxy1", "off"]
+    end
+    config.vm.provision "shell", inline: <<-SHELL
+      sed -i 's/ChallengeResponseAuthentication no/ChallengeResponseAuthentication yes/g' /etc/ssh/sshd_config
+      sleep 3
+      service ssh restart
+    SHELL
+    machine.vm.provision "shell", path: "scripts/install_dns.sh"
+    machine.vm.provision "shell", path: "scripts/install_dhcp.sh"
+    machine.vm.provision "shell", path: "scripts/install_nrpe.sh"
+    machine.vm.provision "shell", path: "scripts/test_dns.sh"
+
+  end
+
+end

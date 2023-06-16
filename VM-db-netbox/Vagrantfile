@@ -1,0 +1,30 @@
+# -*- mode: ruby -*-
+# vi: set ft=ruby :
+
+Vagrant.configure("2") do |config|
+
+  # Serveur virtuel de démonstration
+  config.vm.define "DBnetbox" do |machine|
+    machine.vm.hostname = "DBnetbox"
+    machine.vm.box = "debian/bullseye64"
+    machine.vm.network :public_network, bridge:"eno1",use_dhcp_assigned_default_route: true
+
+    machine.vm.provider :virtualbox do |v|
+      v.customize ["modifyvm", :id, "--name", "DBnetbox"]
+      v.customize ["modifyvm", :id, "--groups", "/S8-projet"]
+      v.customize ["modifyvm", :id, "--cpus", "1"]
+      v.customize ["modifyvm", :id, "--memory", 2*1024]
+      v.customize ["modifyvm", :id, "--natdnshostresolver1", "off"]
+      v.customize ["modifyvm", :id, "--natdnsproxy1", "off"]
+    end
+    config.vm.provision "shell", inline: <<-SHELL
+      sed -i 's/ChallengeResponseAuthentication no/ChallengeResponseAuthentication yes/g' /etc/ssh/sshd_config    
+      sleep 3
+      service ssh restart
+    SHELL
+    machine.vm.provision "shell", path: "scripts/install_sys.sh"
+    machine.vm.provision "shell", path: "scripts/install_vault.sh"
+    machine.vm.provision "shell", path: "scripts/install_bdd.sh"
+  end
+
+end

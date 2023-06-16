@@ -1,0 +1,33 @@
+# -*- mode: ruby -*-
+# vi: set ft=ruby :
+
+Vagrant.configure("2") do |config|
+  
+  config.vm.define "Supervision" do |machine|
+    machine.vm.hostname = "Supervision"
+    machine.vm.box = "chavinje/fr-bull-64"
+    machine.vm.network :public_network, bridge: "eno1", use_dhcp_assigned_default_route: true
+    
+    machine.vm.provider :virtualbox do |v|
+      v.customize ["modifyvm", :id, "--name", "Supervision"]
+      v.customize ["modifyvm", :id, "--groups", "/S8-projet"]
+      v.customize ["modifyvm", :id, "--cpus", "2"]
+      v.customize ["modifyvm", :id, "--memory", 2*1024]
+      v.customize ["modifyvm", :id, "--natdnshostresolver1", "off"]
+      v.customize ["modifyvm", :id, "--natdnsproxy1", "off"]
+    end
+    
+    machine.vm.provision "shell", path: "scripts/install_sys.sh"
+    machine.vm.provision "shell", path: "scripts/install_vault.sh"
+    machine.vm.provision "shell", path: "scripts/install_nagios.sh"
+    machine.vm.provision "shell", path: "scripts/install_grafana.sh"
+    machine.vm.provision "shell", path: "scripts/install_rsyslog.sh"
+    machine.vm.provision "shell", path: "scripts/install_wazuh_agent.sh"
+  end
+
+  config.vm.provision "shell", inline: <<-SHELL
+      sed -i 's/ChallengeResponseAuthentication no/ChallengeResponseAuthentication yes/g' /etc/ssh/sshd_config    
+      sleep 3
+      service ssh restart
+    SHELL
+end

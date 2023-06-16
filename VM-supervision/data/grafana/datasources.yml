@@ -1,0 +1,11 @@
+apiVersion: 1
+
+datasources:
+  - name: PNP
+    type: sni-pnp-datasource
+    access: proxy
+    orgId: 1
+    url: http://localhost/pnp4nagios
+    withCredentials: true
+    isDefault: true
+    editable: false

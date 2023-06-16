@@ -1,0 +1,22 @@
+;
+; Zone file for e4.sirt.tp
+;
+; The full zone file
+;
+$TTL 60480
+$ORIGIN e4.sirt.tp.
+@       IN      SOA     VM-DNS.e4.sirt.tp. root.e4.sirt.tp. (
+                        20230511; Serial
+                        604800  ; Refresh
+                        86400   ; Retry
+                        2419200 ; Expire
+                        604800 ); Negative Cache TTL
+;
+@                       IN      NS       VM-DNS.e4.sirt.tp.
+VM-DNS                  IN      A        172.16.2.36
+css                     IN      A        172.16.2.21
+CAUCHY14                IN      A        172.16.2.37
+wazuh                   IN      A        172.16.2.12
+elastic                 IN      A        172.16.2.13
+kibana                  IN      A        172.16.2.14
+localhosts              IN      A        127.0.0.1

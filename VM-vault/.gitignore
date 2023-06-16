@@ -1,0 +1,12 @@
+logs/*.log
+.vagrant/**
+packer_debian/output-virtualbox-iso
+packer_debian/*.box
+bup_day_gitea/*
+bup_hour_gitea/*
+data/backup
+data/test
+data/passwd
+data/backup_token
+data/test_token
+data/passwd_token

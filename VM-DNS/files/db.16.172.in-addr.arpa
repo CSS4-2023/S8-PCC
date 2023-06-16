@@ -1,0 +1,23 @@
+
+; Zone reverse file for e4.sirt.tp
+;
+; The full zone file
+;
+$TTL 60480
+$ORIGIN 16.172.in-addr.arpa.
+@       IN      SOA     VM-DNS.e4.sirt.tp. root.e4.sirt.tp. (
+                        20230511        ; Serial
+                        60480           ; Refresh
+                        86400           ; Retry
+                        2419200         ; Expire
+                        604800 )        ; Negative Cache TTL
+;
+@               IN      NS       VM-DNS.e4.sirt.tp.
+36.2            IN      PTR      VM-DNS.e4.sirt.tp.
+3.2             IN      PTR      gitea
+21.2            IN      PTR      css
+5.2             IN      PTR      nagios
+4.1             IN      PTR      db-web
+3.1             IN      PTR      db-gitea
+100.0           IN      PTR      web
+99.0            IN      PTR      web2

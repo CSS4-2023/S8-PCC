@@ -1,0 +1,37 @@
+---
+- name: Copy VM-demo folder to web host
+  hosts: Cauchy17.e4.sirt.tp
+  tasks:
+    - name: Copying VM-demo from localhost to remote Web machine
+      become: true
+      copy:
+        src: /home/etudis/Bureau/S8-PCC4/VM-demo
+        dest: /home/ansible
+
+- name: Change owner file
+  hosts: Cauchy13.e4.sirt.tp
+  tasks:
+    - name: chown command
+      become: true
+      command: chown -R ansible:ansible /home/ansible/VM-demo
+
+- name: Recover and share vault backup token to remote web
+  hosts: Cauchy13.e4.sirt.tp
+  tasks:
+    - name: Copy backup token from VM-vault to VM-demo
+      become: true
+      copy:
+        src: /home/etudis/Bureau/VM-vault/data/backup_token
+        dest: /home/ansible/VVM-demo/data
+
+- name: Deploy Web3 (demo) Server
+  hosts: Cauchy13.e4.sirt.tp
+  vars:
+    dir: /home/ansible/VM-demo
+  tasks:
+    - name: Vagrant up Web3 Server
+      become: false
+      command: vagrant up
+      args:
+        chdir: "{{ dir }}"
+

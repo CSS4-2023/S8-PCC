@@ -1,0 +1,82 @@
+Vagrant.configure("2") do |config|
+
+  #VM Elasticsearch
+  config.vm.define "Elastic" do |elasticsearch|
+    elasticsearch.vm.hostname = "Elastic"
+    elasticsearch.vm.box = "chavinje/fr-bull-64"
+    elasticsearch.vm.network :public_network, ip: "172.16.2.13", bridge: "eno1"
+    #elasticsearch.vm.network :private_network, ip: "172.16.2.9"
+
+    elasticsearch.vm.provider "virtualbox" do |vb|
+      vb.customize ["modifyvm", :id, "--name", "Elastic"]
+      vb.customize ["modifyvm", :id, "--groups", "/wazuh"]
+      vb.customize ["modifyvm", :id, "--memory", 2*1024]
+      vb.customize ["modifyvm", :id, "--cpus", "2"]
+      vb.customize ["modifyvm", :id, "--ioapic", "on"]
+      vb.customize ["modifyvm", :id, "--natdnshostresolver1", "on"]
+      vb.customize ["modifyvm", :id, "--natdnsproxy1", "off"]
+    end
+
+    elasticsearch.vm.provision "shell", inline: <<-SHELL
+      sed -i 's/ChallengeResponseAuthentication no/ChallengeResponseAuthentication yes/g' /etc/ssh/sshd_config    
+      sleep 3
+      service ssh restart
+    SHELL
+
+    elasticsearch.vm.provision "shell", path: "scripts/install_sys.sh"
+    elasticsearch.vm.provision "shell", path: "scripts/install_elasticsearch.sh"
+  end
+
+  #VM Wazuh
+  config.vm.define "Wazuh" do |wazuh|
+    wazuh.vm.hostname = "Wazuh"
+    wazuh.vm.box = "chavinje/fr-bull-64"
+    wazuh.vm.network :public_network, ip: "172.16.2.12", bridge: "eno1"
+    #wazuh.vm.network :private_network, ip: "172.16.2.7"
+
+    wazuh.vm.provider "virtualbox" do |vb|
+      vb.customize ["modifyvm", :id, "--name", "Wazuh"]
+      vb.customize ["modifyvm", :id, "--groups", "/wazuh"]
+      vb.customize ["modifyvm", :id, "--cpus", "2"]
+      vb.customize ["modifyvm", :id, "--memory", 4*1024]
+      vb.customize ["modifyvm", :id, "--natdnshostresolver1", "on"]
+      vb.customize ["modifyvm", :id, "--natdnsproxy1", "off"]
+    end
+
+    wazuh.vm.provision "shell", inline: <<-SHELL
+      sed -i 's/ChallengeResponseAuthentication no/ChallengeResponseAuthentication yes/g' /etc/ssh/sshd_config    
+      sleep 3
+      service ssh restart
+    SHELL
+
+    wazuh.vm.provision "shell", path: "scripts/install_sys.sh"
+    wazuh.vm.provision "shell", path: "scripts/install_wazuh.sh"
+  end
+
+  #VM Kibana
+  config.vm.define "Kibana" do |kibana|
+    kibana.vm.hostname = "Kibana"
+    kibana.vm.box = "chavinje/fr-bull-64"
+    kibana.vm.network :public_network, ip: "172.16.2.14", bridge: "eno1"
+    #kibana.vm.network :private_network, ip: "172.16.2.8"
+  
+    kibana.vm.provider "virtualbox" do |vb|
+      vb.customize ["modifyvm", :id, "--name", "Kibana"]
+      vb.customize ["modifyvm", :id, "--groups", "/wazuh"]
+      vb.customize ["modifyvm", :id, "--memory", 4*1024]
+      vb.customize ["modifyvm", :id, "--cpus", "1"]
+      vb.customize ["modifyvm", :id, "--ioapic", "on"]
+      vb.customize ["modifyvm", :id, "--natdnshostresolver1", "on"]
+      vb.customize ["modifyvm", :id, "--natdnsproxy1", "off"]
+    end
+    
+    kibana.vm.provision "shell", inline: <<-SHELL
+      sed -i 's/ChallengeResponseAuthentication no/ChallengeResponseAuthentication yes/g' /etc/ssh/sshd_config    
+      sleep 3
+      service ssh restart
+    SHELL
+    kibana.vm.provision "shell", path: "scripts/install_sys.sh"
+    kibana.vm.provision "shell", path: "scripts/install_kibana.sh"
+  end
+
+end

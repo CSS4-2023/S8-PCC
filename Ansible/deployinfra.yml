@@ -1,0 +1,277 @@
+---
+- name: Clone Gitea repository on localhost
+  hosts: localhost
+  tasks:
+    - name: Clone Gitea repository
+      git:
+        repo: https://192.168.4.25/gitea/CSS4/S8-PCC4
+        dest: /home/etudis/Bureau/S8-PCC4
+        version: dev
+
+- name: Copy VM-db-netbox folder to management host
+  hosts: Cauchy17.e4.sirt.tp
+  tasks:
+    - name: Copying VM-db-netbox from localhost to remote Management machine
+      become: true
+      copy:
+        src: /home/etudis/Bureau/S8-PCC4/VM-db-netbox
+        dest: /home/ansible
+
+- name: Change owner file
+  hosts: Cauchy17.e4.sirt.tp
+  tasks:
+    - name: chown command
+      become: true
+      command: chown -R ansible:ansible /home/ansible/VM-db-netbox
+
+- name: Recover and share vault backup token to remote DB
+  hosts: Cauchy17.e4.sirt.tp
+  tasks:
+    - name: Copy backup token from VM-vault to VM-db-netbox
+      become: true
+      copy:
+        src: /home/etudis/Bureau/VM-vault/data/backup_token
+        dest: /home/ansible/VM-db-netbox/data
+
+- name: Copy VM-netbox folder to management host
+  hosts: Cauchy18.e4.sirt.tp
+  tasks:
+    - name: Copying VM-netbox from localhost to remote Management machine
+      become: true
+      copy:
+        src: /home/etudis/Bureau/S8-PCC4/VM-netbox
+        dest: /home/ansible
+
+- name: Change owner file
+  hosts: Cauchy18.e4.sirt.tp
+  tasks:
+    - name: chown command
+      become: true
+      command: chown -R ansible:ansible /home/ansible/VM-netbox
+
+- name: Recover and share vault passwd token to remote DB
+  hosts: Cauchy17.e4.sirt.tp
+  tasks:
+    - name: Copy passwd token from VM-vault to VM-db-netbox
+      become: true
+      copy:
+        src: /home/etudis/Bureau/VM-vault/data/passwd_token
+        dest: /home/ansible/VM-db-netbox/data
+
+- name: Deploy VM-db-netbox Server
+  hosts: Cauchy17.e4.sirt.tp
+  vars:
+    dir: /home/ansible/VM-db-netbox
+  tasks:
+    - name: Vagrant up VM-db-netbox Server
+      become: false
+      shell: vagrant up
+      args:
+        chdir: "{{ dir }}"
+
+- name: Deploy Netbox Server
+  hosts: Cauchy18.e4.sirt.tp
+  vars:
+    dir: /home/ansible/VM-netbox
+  tasks:
+    - name: Vagrant up Netbox Server
+      become: false
+      shell: vagrant up
+      args:
+        chdir: "{{ dir }}"
+
+- name: Copy VM-wazuh folder to management host
+  hosts: Cauchy18.e4.sirt.tp
+  tasks:
+    - name: Copying VM-wazuh from localhost to remote Management machine
+      become: true
+      copy:
+        src: /home/etudis/Bureau/S8-PCC4/VM-wazuh
+        dest: /home/ansible
+
+- name: Change owner file
+  hosts: Cauchy18.e4.sirt.tp
+  tasks:
+    - name: chown command
+      become: true
+      command: chown -R ansible:ansible /home/ansible/VM-wazuh
+
+- name: Deploy Wazuh Server
+  hosts: Cauchy18.e4.sirt.tp
+  vars:
+    dir: /home/ansible/VM-wazuh
+  tasks:
+    - name: Vagrant up Wazuh Server
+      become: false
+      shell: vagrant up
+      args:
+        chdir: "{{ dir }}"
+
+- name: Copy VM-db-web folder to DB host
+  hosts: Cauchy17.e4.sirt.tp
+  tasks:
+    - name: Copying VM-db-web from localhost to remote DB machine
+      become: true
+      copy:
+        src: /home/etudis/Bureau/S8-PCC4/VM-db-web
+        dest: /home/ansible
+
+- name: Change owner file
+  hosts: Cauchy17.e4.sirt.tp
+  tasks:
+    - name: chown command
+      become: true
+      command: chown -R ansible:ansible /home/ansible/VM-db-web
+
+- name: Recover and share vault backup token to remote DB
+  hosts: Cauchy17.e4.sirt.tp
+  tasks:
+    - name: Copy backup token from VM-vault to VM-db-web
+      become: true
+      copy:
+        src: /home/etudis/Bureau/VM-vault/data/backup_token
+        dest: /home/ansible/VM-db-web/data
+
+- name: Recover and share vault passwd token to remote DB
+  hosts: Cauchy17.e4.sirt.tp
+  tasks:
+    - name: Copy passwd token from VM-vault to VM-db-web
+      become: true
+      copy:
+        src: /home/etudis/Bureau/VM-vault/data/passwd_token
+        dest: /home/ansible/VM-db-web/data
+
+- name: Copy VM-web folder to web host
+  hosts: Cauchy13.e4.sirt.tp
+  tasks:
+    - name: Copying VM-web from localhost to remote WEB machine
+      become: true
+      copy:
+        src: /home/etudis/Bureau/S8-PCC4/VM-web
+        dest: /home/ansible
+
+- name: Change owner file
+  hosts: Cauchy13.e4.sirt.tp
+  tasks:
+    - name: chown command
+      become: true
+      command: chown -R ansible:ansible /home/ansible/VM-web
+
+- name: Copy VM-supervision folder to Bureau
+  hosts: localhost
+  tasks:
+    - name: Copying VM-supervision from localhost to local machine
+      become: true
+      command: cp -r /home/etudis/Bureau/S8-PCC4/VM-supervision /home/etudis/Bureau/
+
+- name: Recover and share vault backup token to local host
+  hosts: localhost
+  tasks:
+    - name: Copy backup token from VM-vault to VM-supervision 
+      become: true
+      copy:
+        src: /home/etudis/Bureau/VM-vault/data/backup_token
+        dest: /home/etudis/Bureau/VM-supervision/data
+
+- name: Copy test public-key to VM-supervision
+  hosts: localhost
+  tasks:
+    - name: Copying test.pub from local machine to VM-supervision
+      become: true
+      command: cp ~/.ssh/test.pub /home/etudis/Bureau/VM-supervision/data/test.pub
+
+- name: Copy test public-key to VM-web1
+  hosts: Cauchy13.e4.sirt.tp
+  tasks:
+    - name: Copying test.pub from local machine to VM-web1
+      become: true
+      copy:
+        src: ~/.ssh/test.pub
+        dest: /home/ansible/VM-web/data/test.pub
+
+- name: Deploy Supervision Server
+  hosts: localhost
+  vars:
+    dir: /home/etudis/Bureau/VM-supervision
+  tasks:
+    - name: Vagrant up Supervision Server
+      become: false
+      shell: vagrant up
+      args:
+        chdir: "{{ dir }}"
+
+- name: Deploy MySQL DB Server for Wordpress
+  hosts: Cauchy17.e4.sirt.tp
+  vars:
+    dir: /home/ansible/VM-db-web
+  tasks:
+    - name: Vagrant up MySQL DB Server for Wordpress
+      become: false
+      shell: vagrant up
+      args:
+        chdir: "{{ dir }}"
+
+- name: Deploy Web1 Server
+  hosts: Cauchy13.e4.sirt.tp
+  vars:
+    dir: /home/ansible/VM-web
+  tasks:
+    - name: Vagrant up Web1 Server
+      become: false
+      command: vagrant up
+      args:
+        chdir: "{{ dir }}"
+
+- name: Copy VM-jenkins folder to Bureau
+  hosts: localhost
+  tasks:
+    - name: Copying VM-jenkins from localhost to local machine
+      become: true
+      command: cp -r /home/etudis/Bureau/S8-PCC4/VM-jenkins /home/etudis/Bureau/
+
+- name: Recover and share vault backup token to local
+  hosts: localhost
+  tasks:
+    - name: Copy backup token from VM-vault to VM-jenkins
+      become: true
+      copy:
+        src: /home/etudis/Bureau/VM-vault/data/backup_token
+        dest: /home/etudis/Bureau/VM-jenkins/data
+
+- name: Deploy Jenkins Server
+  hosts: localhost
+  vars:
+    dir: /home/etudis/Bureau/VM-jenkins
+  tasks:
+    - name: Vagrant up Jenkins Server
+      become: false
+      shell: vagrant up
+      args:
+        chdir: "{{ dir }}"
+
+- name: Copy VM-web2 folder to web host
+  hosts: Cauchy13.e4.sirt.tp
+  tasks:
+    - name: Copying VM-web2 from localhost to remote WEB machine
+      become: true
+      copy:
+        src: /home/etudis/Bureau/S8-PCC4/VM-web2
+        dest: /home/ansible
+
+- name: Change owner file
+  hosts: Cauchy13.e4.sirt.tp
+  tasks:
+    - name: chown command
+      become: true
+      command: chown -R ansible:ansible /home/ansible/VM-web2
+
+- name: Deploy Web2 Server
+  hosts: Cauchy13.e4.sirt.tp
+  vars:
+    dir: /home/ansible/VM-web2
+  tasks:
+    - name: Vagrant up Web2 Server
+      become: false
+      command: vagrant up
+      args:
+        chdir: "{{ dir }}"
